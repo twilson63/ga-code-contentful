@@ -2,6 +2,15 @@
 
 This is an example of using contentful to pull the title and google analytics code from an app_config entry type. You can create an app_config entry for every application, then change the code, title, keywords and any other boiler plate information.
 
+## How to run the demo
+
+```
+npm install
+npm start
+```
+
+## Example server.js
+
 ``` js
 var config = require('zero-config')(__dirname, { dcValue: 'us-east-1'})
 var http = require('http')
@@ -16,6 +25,7 @@ client.getEntry(config.get('entry'))
   .then(result => {
 
     var server = http.createServer(function (req, res) {
+      res.writeHead(200, { 'content-type': 'text/html'})
       res.end(indexTemplate(result.fields))
     })
 
